@@ -1,2 +1,3 @@
 # Compler-Exp
-Codes of compiler experiments
+SCUT 2024 Software Engginering compiler terchnology experiments
+Prof: Xu Yang
