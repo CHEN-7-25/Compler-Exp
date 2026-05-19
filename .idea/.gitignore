@@ -1,0 +1,16 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# 忽略 Maven 编译输出目录
+target/
+# 如果你以后可能用到 Gradle，也可以顺便加上这行
+build/
+# 忽略 IDEA 的本地日志和缓存
+.gradle/
+.lock
+.idea/
