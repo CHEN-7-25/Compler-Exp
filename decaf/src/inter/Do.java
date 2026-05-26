@@ -35,11 +35,10 @@ public class Do extends Stmt {
      * 输出：返回值或无
      * 关键逻辑：执行相关编译解析步骤
      */
-   public void gen(int b, int a) {
-      after = a;
-      int label = newlabel();   // label for expr
-      stmt.gen(b,label);
-      emitlabel(label);
-      expr.jumping(b,0);
-   }
+    public void gen(int b, int a) {
+       System.out.println("stmt : do begin");
+       System.out.print("  "); // 为紧跟其后的子语句输出2个空格缩进
+       if (stmt != Stmt.Null) stmt.gen(b, a);
+       System.out.println("stmt : do end");
+    }
 }

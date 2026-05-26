@@ -25,31 +25,10 @@ public class For extends Stmt {
 
     @Override
     public void gen(int b, int a) {
-        after = a;  // 记录跳出循环的目标标号（支持 break 语句）
-        
-        // 1. 生成初始化部分的中间代码
-        if (stmt1 != Stmt.Null) {
-            stmt1.gen(b, a); 
-        }
-        
-        int label = newlabel();   // 循环条件测试的标号 L_test
-        emitlabel(label);
-        
-        // 2. 判定条件：如果条件为假，直接跳到标号 a (即循环结束的地方)
-        expr.jumping(0, a);       
-        
-        int label2 = newlabel();  // 循环体的标号 L_body
-        emitlabel(label2);
-        
-        // 3. 生成循环体代码
-        stmt3.gen(label2, a);     
-        
-        // 4. 生成步进更新部分的代码
-        if (stmt2 != Stmt.Null) {
-            stmt2.gen(label2, a); 
-        }
-        
-        // 5. 无条件跳回到条件测试处
-        emit("goto L" + label);   
+        System.out.println("stmt : for begin");
+        if (stmt1 != Stmt.Null) stmt1.gen(b, a); // 1. 打印初始化赋值 (如 i = 0)
+        if (stmt3 != Stmt.Null) stmt3.gen(b, a); // 2. 递归打印循环体
+        if (stmt2 != Stmt.Null) stmt2.gen(b, a); // 3. 打印迭代更新赋值 (如 i = i + 1)
+        System.out.println("stmt : for end");
     }
 }

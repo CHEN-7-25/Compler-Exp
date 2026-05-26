@@ -27,9 +27,10 @@ public class If extends Stmt {
      * 输出：返回值或无
      * 关键逻辑：执行相关编译解析步骤
      */
-   public void gen(int b, int a) {
-      int label = newlabel(); // label for the code for stmt
-      expr.jumping(0, a);     // fall through on true, goto a on false
-      emitlabel(label); stmt.gen(label, a);
-   }
+    public void gen(int b, int a) {
+       System.out.println("stmt : if begin");
+       System.out.print("  "); // 为紧跟其后的子语句输出2个空格缩进
+       if (stmt != Stmt.Null) stmt.gen(b, a);
+       System.out.println("stmt : if end");
+    }
 }

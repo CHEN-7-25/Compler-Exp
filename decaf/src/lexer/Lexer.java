@@ -79,6 +79,24 @@ public class Lexer {
 			else if(peek=='\n') line = line + 1;
 			else break;
 		}
+		if (peek == '/') {
+			if (readch('/')) {
+				// 如果连续读到两个 '/'，说明是单行注释，循环读取直到整行结束或文件结束
+				while (peek != '\n' && peek != (char) 65535) {
+					readch();
+				}
+				if (peek == '\n') {
+					line = line + 1; // 别忘了给行号加 1
+					peek = ' ';      // 清空 peek 缓冲区
+				}
+				return scan();       // 关键：跳过注释后，递归调用 scan() 接着寻找下一个真实 Token
+			} else {
+				// 如果后面跟着的不是 '/'，说明它只是一个单纯的算术除号 '/'
+				// 注意：如果之前你修改了白名单错误拦截，确保除号 '/' 在你的有效字符集里
+				Token tok = new Token('/');
+				return tok;
+			}
+		}
 		switch(peek){
 		case '&':
 			if(readch('&')) return Word.and; else return new Token('&');

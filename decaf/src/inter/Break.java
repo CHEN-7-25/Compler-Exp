@@ -24,7 +24,7 @@ public class Break extends Stmt {
      * 输出：返回值或无
      * 关键逻辑：执行相关编译解析步骤
      */
-   public void gen(int b, int a) {
-      emit( "goto L" + stmt.after);
-   }
+    public void gen(int b, int a) {
+        System.out.println("break");
+    }
 }

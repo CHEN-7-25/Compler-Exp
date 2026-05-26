@@ -34,11 +34,9 @@ public class While extends Stmt {
      * 输出：返回值或无
      * 关键逻辑：执行相关编译解析步骤
      */
-   public void gen(int b, int a) {
-      after = a;                // save label a
-      expr.jumping(0, a);
-      int label = newlabel();   // label for stmt
-      emitlabel(label); stmt.gen(label, b);
-      emit("goto L" + b);
-   }
+    public void gen(int b, int a) {
+       System.out.println("stmt : while begin");
+       if (stmt != Stmt.Null) stmt.gen(b, a);
+       System.out.println("stmt : while end");
+    }
 }

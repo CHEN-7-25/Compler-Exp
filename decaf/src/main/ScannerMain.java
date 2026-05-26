@@ -44,12 +44,12 @@ public class ScannerMain {
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File("D:\\02_Study\\Experiments\\编译技术\\01_Codes\\decaf\\test\\test1.txt");
+        File file = new File("test/test1.txt");
         Reader reader = new InputStreamReader(new FileInputStream(file));
 
         Lexer lex = new Lexer(reader);
 
-        System.out.println("====== Scanner (Kind, Value) 序列输出 ======");
+        System.out.println("Token (Kind, Value) 序列输出");
 
         try {
             while (true) {
@@ -70,6 +70,6 @@ public class ScannerMain {
             System.out.println("词法分析遇到异常。");
         }
 
-        System.out.println("=========================================");
+        System.out.println();
     }
 }

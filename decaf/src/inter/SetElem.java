@@ -41,9 +41,7 @@ public class SetElem extends Stmt {
      * 输出：返回值或无
      * 关键逻辑：执行相关编译解析步骤
      */
-   public void gen(int b, int a) {
-      String s1 = index.reduce().toString();
-      String s2 = expr.reduce().toString();
-      emit(array.toString() + " [ " + s1 + " ] = " + s2);
-   }
+    public void gen(int b, int a) {
+       System.out.println("assignment");
+    }
 }
