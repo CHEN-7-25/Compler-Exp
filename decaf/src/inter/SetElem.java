@@ -47,6 +47,7 @@ public class SetElem extends Stmt {
       String s1 = index.reduce().toString(); // 获取归约后的有效索引地址（临时变量或常量）
       String s2 = expr.reduce().toString(); // 获取归约后的右值地址
       emit(array.toString() + " [ " + s1 + " ] = " + s2); // [TAC生成] 发射数组赋值指令
+      // 以下注释的代码用于输出语法树结构，便于调试和理解生成过程（实验3）
       // System.out.println("assignment");
    }
 }

@@ -37,6 +37,7 @@ public class Seq extends Stmt {
 			emitlabel(label);
 			stmt2.gen(label, a);
 		}
+		// 以下注释的代码用于输出语法树结构，便于调试和理解生成过程（实验3）
 		// if ( stmt1 != Stmt.Null ) stmt1.gen(b, a);
 		// if ( stmt2 != Stmt.Null ) stmt2.gen(b, a);
 	}

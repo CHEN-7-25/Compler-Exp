@@ -23,6 +23,7 @@ public class Break extends Stmt {
      */
     public void gen(int b, int a) {
         emit("goto L" + stmt.after); // [TAC生成] 直接无条件跳转到外围循环记录的退出标号
+        // 以下注释的代码用于输出语法树结构，便于调试和理解生成过程（实验3）
         // System.out.println("break");
     }
 }

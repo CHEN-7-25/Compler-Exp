@@ -86,9 +86,9 @@ public class Parser {
 		int begin = s.newlabel();
 		int after = s.newlabel();
 		// [中间代码发射] : 打印 L1:，启动 AST 的遍历，最后打印 L2:
-		s.emitlabel(begin); // 打印L1，实验3的语法树输出需要将其注释掉
+		s.emitlabel(begin); // 打印L1，实验3的语法树输出不需要可以将其注释掉
 		s.gen(begin, after);
-		s.emitlabel(after); // 打印L2，实验3的语法树输出需要将其注释掉
+		s.emitlabel(after); // 打印L2，实验3的语法树输出不需要可以将其注释掉
 	}
 
 	/**

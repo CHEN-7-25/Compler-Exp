@@ -31,6 +31,7 @@ public class If extends Stmt {
         expr.jumping(0, a); // fall through on true, goto a on false
         emitlabel(label);
         stmt.gen(label, a);
+        // 以下注释的代码用于输出语法树结构，便于调试和理解生成过程（实验3）
         // System.out.println("stmt : if begin");
         // System.out.print(" "); // 为紧跟其后的子语句输出2个空格缩进
         // if (stmt != Stmt.Null) stmt.gen(b, a);

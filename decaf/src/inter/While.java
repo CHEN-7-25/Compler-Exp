@@ -38,6 +38,7 @@ public class While extends Stmt {
         emitlabel(label);
         stmt.gen(label, b);
         emit("goto L" + b); // 循环体执行完毕后，跳回判断条件 (goto b)
+        // 以下注释的代码用于输出语法树结构，便于调试和理解生成过程（实验3）
         // System.out.println("stmt : while begin");
         // if (stmt != Stmt.Null) stmt.gen(b, a);
         // System.out.println("stmt : while end");

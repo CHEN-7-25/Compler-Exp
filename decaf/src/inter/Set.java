@@ -41,6 +41,7 @@ public class Set extends Stmt {
     */
    public void gen(int b, int a) {
       emit(id.toString() + " = " + expr.gen().toString()); // [TAC生成] 发射赋值指令，此处调用 expr.gen() 进行代码生成
+      // 以下注释的代码用于输出语法树结构，便于调试和理解生成过程（实验3）
       // System.out.println("assignment");
    }
 }

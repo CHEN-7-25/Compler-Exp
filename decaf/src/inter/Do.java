@@ -37,6 +37,7 @@ public class Do extends Stmt {
         stmt.gen(b, label); // 执行循环体代码
         emitlabel(label); // 发射条件判断的标号
         expr.jumping(b, 0); // 条件判断：true 跳回 b，false 则继续执行后续指令（自然跳出）
+        // 以下注释的代码用于输出语法树结构，便于调试和理解生成过程（实验3）
         // System.out.println("stmt : do begin");
         // System.out.print(" "); // 为紧跟其后的子语句输出2个空格缩进
         // if (stmt != Stmt.Null) stmt.gen(b, a);
