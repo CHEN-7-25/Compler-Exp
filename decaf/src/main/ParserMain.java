@@ -10,17 +10,15 @@ import parser.Parser;
 import lexer.Lexer;
 
 /**
- * 类 Main 功能说明：
- * 核心作用：提供前端编译所需的抽象表示与操作
+ * 解析器的主启动类。
+ * 包含应用程序入口，负责串联词法分析器(Lexer)和语法分析器(Parser)以运行实验程序。
  */
 public class ParserMain {
 
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
-     */
+	/**
+	 * 主函数入口。
+	 * 读取测试源码文件，依次初始化词法器和语法器，最后触发由顶向下的语法分析（program）。
+	 */
 	public static void main(String[] args) throws IOException {
 		File file = new File("test/test1.txt");
 		Reader reader = null;

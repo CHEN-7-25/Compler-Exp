@@ -2,46 +2,34 @@ package inter;
 
 import lexer.Lexer;
 
-/**
- * 类 Node 功能说明：
- * 核心作用：提供前端编译所需的抽象表示与操作
- */
 public class Node {
+	/**
+     * 记录该节点在源代码中的物理行号。
+     * 用于在语义分析阶段发生错误时，能够精准定位报错的源码位置。
+     */
 	int lexline = 0;
 	
+	/**
+     * 静态全局标号计数器。
+     * 用于为中间代码生成唯一的控制流跳转锚点（如 L1, L2, L3...）。
+     */
 	Node() {lexline=Lexer.line;}
 	
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
+	/**
+     * 生成一个新的中间代码标号。
+     * * @return 新的标号整数值
      */
 	void error(String s) { throw new Error("near line "+lexline+": "+s); }
 	
 	static int labels = 0;
 
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
-     */
 	public int newlabel() { return ++labels;}
 	
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
+	/**
+     * 在控制台输出（发射）一个带有冒号的标号（如 L1: ）。
+     * * @param i 需要输出的标号整数值
      */
 	public void emitlabel(int i) { System.out.print("L"+i+":"); }
 	
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
-     */
 	public void emit(String s) { System.out.println("\t"+s); }
 }

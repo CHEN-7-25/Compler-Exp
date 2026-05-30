@@ -4,42 +4,33 @@ import symbols.Type;
 import lexer.Token;
 
 /**
- * 类 Arith 功能说明：
- * 核心作用：提供前端编译所需的抽象表示与操作
+ * 抽象语法树节点：双目算术运算符 (如 +, -, *, /)。
  */
 public class Arith extends Op {
 
-	   public Expr expr1, expr2;
+	public Expr expr1, expr2;
 
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
-     */
-	   public Arith(Token tok, Expr x1, Expr x2)  {
-	      super(tok, null); expr1 = x1; expr2 = x2;
-	      type = Type.max(expr1.type, expr2.type);
-	      if (type == null ) error("type error");
-	   }
-
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
-     */
-	   public Expr gen() {
-	      return new Arith(op, expr1.reduce(), expr2.reduce());
-	   }
-
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
-     */
-	   public String toString() {
-	      return expr1.toString()+" "+op.toString()+" "+expr2.toString();
-	   }
+	/**
+	 * 构造双目运算符节点，并推导结果的类型。
+	 */
+	public Arith(Token tok, Expr x1, Expr x2) {
+		super(tok, null);
+		expr1 = x1;
+		expr2 = x2;
+		type = Type.max(expr1.type, expr2.type); // 将类型向上转型合并 (比如 int 和 float 运算结果为 float)
+		if (type == null)
+			error("type error");
 	}
+
+	/**
+	 * 中间代码生成逻辑。对于算术运算，需先将其左右操作数分别归约到地址中，再返回新的整体算术运算节点。
+	 * 被 reduce() 调用时，将拼接为类似 t = t1 + t2。
+	 */
+	public Expr gen() {
+		return new Arith(op, expr1.reduce(), expr2.reduce());
+	}
+
+	public String toString() {
+		return expr1.toString() + " " + op.toString() + " " + expr2.toString();
+	}
+}

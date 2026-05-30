@@ -1,23 +1,22 @@
 package lexer;
 
 /**
- * 类 Token 功能说明：
- * 核心作用：提供前端编译所需的抽象表示与操作
+ * 词法记号（Token）基类。
+ * 代表词法分析器输出的基本单元，包含一个整型的类别标签（tag）。
  */
 public class Token {
 	public final int tag;
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
-     */
-	public Token(int t) { tag = t; }
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
-     */
-	public String toString() { return ""+(char)tag; }
+
+	/**
+	 * 构造词法记号节点。
+	 * 
+	 * @param t 类别标签，对应 Tag 类中的常数或单个字符的 ASCII 值
+	 */
+	public Token(int t) {
+		tag = t;
+	}
+
+	public String toString() {
+		return "" + (char) tag;
+	}
 }

@@ -1,21 +1,6 @@
 {
-  int a;int b;float c;
-  int[3][3] arr;
-  b=3;
-  // 循环
-  for(a=0;a<3;a=a+1)
-  {
-    b=0;
-    while(b<3)
-      {
-        arr[a][b]=a;
-        b=b+1;
-        if(b==4)
-        break;
-      }
-  }
-  c=1.0;
-  do c=c*2 ;while(b<3);
-  if(a<1)a=3;
-  a=1;
+    int a; int b; int c;
+    for(a=b; a<c; a=a+1) {
+        b=b-1;
+    }
 }

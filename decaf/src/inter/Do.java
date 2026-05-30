@@ -3,42 +3,43 @@ package inter;
 import symbols.Type;
 
 /**
- * 类 Do 功能说明：
- * 核心作用：提供前端编译所需的抽象表示与操作
+ * 抽象语法树节点：Do-While 循环语句。
  */
 public class Do extends Stmt {
 
-   Expr expr; Stmt stmt;
+    Expr expr;
+    Stmt stmt;
+
+    public Do() {
+        expr = null;
+        stmt = null;
+    }
 
     /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
+     * 初始化 Do-While 节点，并进行布尔条件类型检查。
      */
-   public Do() { expr = null; stmt = null; }
+    public void init(Stmt s, Expr x) {
+        expr = x;
+        stmt = s;
+        if (expr.type != Type.Bool)
+            expr.error("boolean required in do");
+    }
 
     /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
-     */
-   public void init(Stmt s, Expr x) {
-      expr = x; stmt = s;
-      if( expr.type != Type.Bool ) expr.error("boolean required in do");
-   }
-
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
+     * 中间代码生成：生成 Do-While 循环的控制流。
+     * 
+     * @param b 循环体的进入标号，即下次迭代跳回的目标
+     * @param a 循环退出的标号
      */
     public void gen(int b, int a) {
-       System.out.println("stmt : do begin");
-       System.out.print("  "); // 为紧跟其后的子语句输出2个空格缩进
-       if (stmt != Stmt.Null) stmt.gen(b, a);
-       System.out.println("stmt : do end");
+        after = a; // 保存跳出外层的标号 a，供内部 break 使用
+        int label = newlabel(); // [TAC生成] 表达式条件判断的标号
+        stmt.gen(b, label); // 执行循环体代码
+        emitlabel(label); // 发射条件判断的标号
+        expr.jumping(b, 0); // 条件判断：true 跳回 b，false 则继续执行后续指令（自然跳出）
+        // System.out.println("stmt : do begin");
+        // System.out.print(" "); // 为紧跟其后的子语句输出2个空格缩进
+        // if (stmt != Stmt.Null) stmt.gen(b, a);
+        // System.out.println("stmt : do end");
     }
 }

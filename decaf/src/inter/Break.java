@@ -1,30 +1,28 @@
 package inter;
 
 /**
- * 类 Break 功能说明：
- * 核心作用：提供前端编译所需的抽象表示与操作
+ * 抽象语法树节点：Break 控制流跳出语句。
  */
 public class Break extends Stmt {
-   Stmt stmt;
+    Stmt stmt;
 
     /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
+     * 构造 Break 节点，并检查当前上下文是否存在包裹的循环结构。
      */
-   public Break() {
-      if( Stmt.Enclosing == Stmt.Null ) error("unenclosed break");
-      stmt = Stmt.Enclosing;
-   }
+    public Break() {
+        if (Stmt.Enclosing == Stmt.Null)
+            error("unenclosed break"); // 如果不在循环体内，则报错
+        stmt = Stmt.Enclosing; // 记录外层循环，用于后续寻找跳转的出口标号
+    }
 
     /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
+     * 中间代码生成：生成无条件跳转指令，跳出最近的循环体。
+     * 
+     * @param b 所在语句的进入标号（本结构不使用）
+     * @param a 所在语句的退出标号（不使用，使用外环的 after 标号替代）
      */
     public void gen(int b, int a) {
-        System.out.println("break");
+        emit("goto L" + stmt.after); // [TAC生成] 直接无条件跳转到外围循环记录的退出标号
+        // System.out.println("break");
     }
 }

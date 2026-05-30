@@ -3,34 +3,38 @@ package inter;
 import symbols.Type;
 
 /**
- * 类 Else 功能说明：
- * 核心作用：提供前端编译所需的抽象表示与操作
+ * 抽象语法树节点：双分支 If-Else 控制流语句。
  */
 public class Else extends Stmt {
 
-   Expr expr; Stmt stmt1, stmt2;
+   Expr expr;
+   Stmt stmt1, stmt2;
 
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
-     */
+   /**
+    * 构造双分支 If-Else 语句节点，并进行语义类型检查。
+    */
    public Else(Expr x, Stmt s1, Stmt s2) {
-      expr = x; stmt1 = s1; stmt2 = s2;
-      if( expr.type != Type.Bool ) expr.error("boolean required in if");
+      expr = x;
+      stmt1 = s1;
+      stmt2 = s2;
+      if (expr.type != Type.Bool)
+         expr.error("boolean required in if");
    }
-    /**
-     * 方法 None 功能：
-     * 输入：参数列表
-     * 输出：返回值或无
-     * 关键逻辑：执行相关编译解析步骤
-     */
+
+   /**
+    * 中间代码生成：生成双分支 If-Else 结构的控制流。
+    * 
+    * @param b 当前语句块的进入标号
+    * @param a 当前语句块的跳出标号
+    */
    public void gen(int b, int a) {
-      int label1 = newlabel();   // label1 for stmt1
-      int label2 = newlabel();   // label2 for stmt2
-      expr.jumping(0,label2);    // fall through to stmt1 on true
-      emitlabel(label1); stmt1.gen(label1, a); emit("goto L" + a);
-      emitlabel(label2); stmt2.gen(label2, a);
+      int label1 = newlabel(); // [TAC生成] label1 对应 if 成功分支 (stmt1)
+      int label2 = newlabel(); // [TAC生成] label2 对应 else 分支 (stmt2)
+      expr.jumping(0, label2); // 条件判断：如果是 true 直接进入 stmt1，如果是 false 跳转到 label2
+      emitlabel(label1);
+      stmt1.gen(label1, a);
+      emit("goto L" + a); // stmt1 执行完后直接跳出结构
+      emitlabel(label2);
+      stmt2.gen(label2, a); // stmt2 执行逻辑
    }
 }
